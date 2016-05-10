@@ -1,0 +1,13 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile localGroovy()
+    compile  gradleApi()
+
+    compile 'org.bouncycastle:bcpg-jdk15on:1.54'
+    compile 'commons-io:commons-io:2.5'
+}
