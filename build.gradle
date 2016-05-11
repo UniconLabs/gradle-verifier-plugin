@@ -1,3 +1,25 @@
+apply plugin: PGPVerifyPlugin
+apply plugin: 'groovy'
+
+repositories {
+    maven { url = 'http://dl.bintray.com/uniconiam/maven'}
+}
+
+dependencies {
+    compile "org.apereo.cas:cas-saml-auth:1.0-M6", { transitive = false}
+    verification "org.apereo.cas:cas-saml-auth:1.0-M6@jar.asc"
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = 2.13
+}
+
+task testme(type: Copy) {
+    from configurations.verification
+    into temporaryDir
+}
+
+PGPVerifyPlugin {
+    // this property is set in the `~/.gradle/gradle.properties` file
+    pgpKeyRing = new File(project."verification.publicKeyRingFile")
 }
